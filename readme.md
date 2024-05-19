@@ -1,7 +1,5 @@
 # ELASTIC SEARCH DEPLOYMENT
 
-- It has two elastic search nodes, one kibana
-
 ## Update your v-ram for the deployment ( linux )
 
 ```
