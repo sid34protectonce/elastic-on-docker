@@ -8,7 +8,7 @@
 sudo sysctl -w vm.max_map_count=262144
 ```
 
-## How To start ( without enterprize server)
+## How To start
 
 ```
 docker compose up -d
