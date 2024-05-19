@@ -28,4 +28,5 @@ docker compose up -d
 ```
 
 ### Note
+
     If you r running without enterprize server then make sure to clear volumns before restarting the deployment
