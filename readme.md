@@ -26,3 +26,6 @@ docker compose down
 cd enterprize_server
 docker compose up -d
 ```
+
+### Note
+    If you r running without enterprize server then make sure to clear volumns before restarting the deployment
