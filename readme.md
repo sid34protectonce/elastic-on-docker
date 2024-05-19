@@ -21,7 +21,7 @@ docker compose down
 ## Run with Enterprise server
 
 ```
-cd enterprize_server
+cd enterprise_server
 docker compose up -d
 ```
 
