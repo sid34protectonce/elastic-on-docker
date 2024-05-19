@@ -1,13 +1,14 @@
 services:
   es01:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.8.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.21
     container_name: es01
     environment:
-        ELASTIC_USERNAME: elastic
         ELASTIC_PASSWORD: abc123
         node.name: es01
         cluster.name: elasticsearch
         ES_JAVA_OPTS: -Xms512m -Xmx512m
+        cluster.initial_master_nodes: es01
+        bootstrap.memory_lock: true
     ulimits:
       memlock:
         soft: -1
@@ -20,30 +21,28 @@ services:
     networks:
       - elastic
 
-  ent-search:
-    image: docker.elastic.co/enterprise-search/enterprise-search:7.8.1
-    container_name: ent-search.cloud
-    ports:
-      - 3002:3002
-    depends_on:
-      - "es01"
-      - "kibana"
-    environment:
-      - "JAVA_OPTS=-Xms2g -Xmx2g"
-      - "ENT_SEARCH_DEFAULT_PASSWORD=abc123"
-      - "elasticsearch.username=elastic"
-      - "elasticsearch.password=abc123"
-      - "elasticsearch.startup_retry.interval=15"
-      - "enterpriseSearch.ssl.verificationMode=none"
-      - "secret_management.encryption_keys=[aa1643e11a21cfb4bb522e91221eb48fdb051a9d1ce5394e585fdf129f129685]"
+  # ent-search:
+  #   image: docker.elastic.co/enterprise-search/enterprise-search:7.8.1
+  #   container_name: ent-search.cloud
+  #   ports:
+  #     - 3002:3002
+  #   depends_on:
+  #     - "es01"
+  #     - "kibana"
+  #   environment:
+  #     - "JAVA_OPTS=-Xms2g -Xmx2g"
+  #     - "ENT_SEARCH_DEFAULT_PASSWORD=abc123"
+  #     - "elasticsearch.username=elastic"
+  #     - "elasticsearch.password=abc123"
+  #     - "elasticsearch.startup_retry.interval=15"
+  #     - "enterpriseSearch.ssl.verificationMode=none"
+  #     - "secret_management.encryption_keys=[aa1643e11a21cfb4bb522e91221eb48fdb051a9d1ce5394e585fdf129f129685]"
 
   kibana:
-    image: docker.elastic.co/kibana/kibana:7.8.1
-    depends_on:
-      - "es01"
+    image: docker.elastic.co/kibana/kibana:7.17.21
     environment:
       SERVER_NAME: kibana.example.org
-      ELASTICSEARCH_HOSTS: '["http://es01:9200"]'
+      ELASTICSEARCH_HOSTS: '["http://localhost:9200"]'
     networks:
       - elastic
     volumes:
