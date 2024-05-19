@@ -28,3 +28,14 @@ docker compose up -d
 ### Note
 
     If you r running without enterprise server then make sure to clear volumns before restarting the deployment
+
+
+## Default Stuff
+
+UserName
+
+    elastic
+
+Password
+
+    abc123
